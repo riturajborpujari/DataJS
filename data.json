@@ -1,0 +1,5 @@
+{
+    "usage" : "Add [name,addr] arrays inside rows to insert them into table",
+    "rows"  : [
+    ]
+}
