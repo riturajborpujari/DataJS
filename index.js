@@ -9,7 +9,6 @@ var conn = new connection(
     config.pass, config.db);
 
 
-
 // if data is present in data.json... insert it into customers table
 for( let i = 0; i < data.rows.length; i++)  {
     conn = conn.insert("customers", data.rows[i]).runQuery( (err, result)=>   {
@@ -23,6 +22,7 @@ for( let i = 0; i < data.rows.length; i++)  {
     });
 }
 
+// show all data
 conn = conn.select("*").from("customers").limit(3).runQuery( (err, result, fields) => {
     if(err) console.log(err);
     else {
@@ -33,6 +33,7 @@ conn = conn.select("*").from("customers").limit(3).runQuery( (err, result, field
     }
 }) ;
 
+//update a particular field
 conn = conn.update("customers").set("addr", "Guwahati").where("addr='Assam'").runQuery( (err, result, fields)=>{
     if(err) console.log(err);
     else    {
