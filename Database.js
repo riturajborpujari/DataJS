@@ -37,19 +37,6 @@ module.exports = function createConn(_host, _user, _pass, _db)   {
         return this;
     }
 
-    this.getData = (callback) => {    
-
-        this.conn.query( this.queryStr, (err, result, fields) =>    {
-            if(err) console.log("Database read failed.");
-            this.err = err;
-            this.result = result;
-            this.fields = fields;
-            
-            callback(this.err, this.result, this.fields);
-        });
-        return this;
-    }
-
     this.insert = (table, values)   =>   {
         this.queryStr = "INSERT INTO " + table + " VALUES(";
         let numValues = values.length;
