@@ -8,6 +8,8 @@ var conn = new connection(
     config.host, config.user,
     config.pass, config.db);
 
+// create the customers table from schema if not exists
+conn = conn.createTable('customers', config.schema);
 
 
 // if data is present in data.json... insert it into customers table
@@ -23,7 +25,8 @@ for( let i = 0; i < data.rows.length; i++)  {
     });
 }
 
-conn = conn.select("*").from("customers").limit(3).runQuery( (err, result, fields) => {
+// show all data
+conn = conn.select("*").from("customers").runQuery( (err, result, fields) => {
     if(err) console.log(err);
     else {
 
@@ -33,9 +36,11 @@ conn = conn.select("*").from("customers").limit(3).runQuery( (err, result, field
     }
 }) ;
 
+//update a particular field
 conn = conn.update("customers").set("addr", "Guwahati").where("addr='Assam'").runQuery( (err, result, fields)=>{
     if(err) console.log(err);
     else    {
         console.log('Update result: successfully updated ' ,result.changedRows, " rows.");
     }
-})
+});
+

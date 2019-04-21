@@ -16,6 +16,24 @@ module.exports = function createConn(_host, _user, _pass, _db)   {
         if(error)   console.log(error);
     } );
 
+    this.createTable = (tableName, schema) =>    {
+        this.queryStr = "CREATE TABLE IF NOT EXISTS " + tableName + " (";
+
+        for(let name in schema) {
+            this.queryStr += name + " " + schema[name] + ",";
+        }
+
+        this.queryStr = this.queryStr.slice(0, -1);
+        this.queryStr += ")";
+
+        
+        this.conn.query(this.queryStr, (err, result)=>  {
+            if(err) console.log(err);
+        });
+
+        return this;
+    }
+
     this.select = (columns) =>   {
         this.queryStr = "SELECT ";
         this.queryStr += columns;
