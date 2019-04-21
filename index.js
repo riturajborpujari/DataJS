@@ -33,4 +33,4 @@ conn = conn.select("*").from("customers").limit(3).getData( (err, result, fields
             console.log(`Name\t: ${item.name} \t Addr\t: ${item.addr}`);
         }
     }
-});
+}) ;
