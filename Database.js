@@ -38,7 +38,6 @@ module.exports = function createConn(_host, _user, _pass, _db)   {
     }
 
     this.getData = (callback) => {    
-        this.queryStr += ";";
 
         this.conn.query( this.queryStr, (err, result, fields) =>    {
             if(err) console.log("Database read failed.");
@@ -51,7 +50,7 @@ module.exports = function createConn(_host, _user, _pass, _db)   {
         return this;
     }
 
-    this.insert = (table, values, callback)   =>   {
+    this.insert = (table, values)   =>   {
         this.queryStr = "INSERT INTO " + table + " VALUES(";
         let numValues = values.length;
         for(let i = 0; i < numValues; i++)  {
@@ -61,9 +60,23 @@ module.exports = function createConn(_host, _user, _pass, _db)   {
         }
         this.queryStr += ");";
 
-        this.conn.query(this.queryStr, (err, result) =>        {
-            callback(err, result);
-        });
+        return this;
+    }
+
+    this.update = (table)  => {
+        this.queryStr = "UPDATE " + table + " ";
+        return this;
+    }
+
+    this.set = (col, value) =>   {
+        this.queryStr += " SET " + col + " = '" + value + "' ";
+        return this; 
+    }
+
+    this.runQuery = (callback) => {
+        this.conn.query(this.queryStr, (err, result, fields) => {
+            callback(err, result, fields);
+        } );
 
         return this;
     }
