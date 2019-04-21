@@ -4,10 +4,9 @@ var config = require('./config.json');
 
 var data = require('./data.json');
 
-conn = new connection(
+var conn = new connection(
     config.host, config.user,
-     config.pass, config.db);
-
+    config.pass, config.db);
 
 // if data is present in data.json... insert it into customers table
 for( let i = 0; i < data.rows.length; i++)  {
