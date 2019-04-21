@@ -4,9 +4,16 @@ var config = require('./config.json');
 
 var data = require('./data.json');
 
-conn = new connection(
-    config.host, config.user,
-     config.pass, config.db);
+try {
+
+    var conn = new connection(
+        config.host, config.user,
+        config.pass, config.db);
+}
+catch (error)   {
+    console.log("Error: ", error.message);
+}
+
 
 
 // if data is present in data.json... insert it into customers table
