@@ -13,7 +13,7 @@ module.exports = function createConn(_host, _user, _pass, _db)   {
     });
 
     this.conn.connect((error) =>{
-        if(error)   console.log('Could not connect to database');
+        if(error)   console.log(error);
     } );
 
     this.select = (columns) =>   {
