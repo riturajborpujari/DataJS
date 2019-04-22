@@ -2,5 +2,10 @@
     "db"        : "",
     "user"      : "",
     "pass"      : "",
-    "host"      : ""
+    "host"      : "",
+
+    "schema"   : {
+        "name"  : "VARCHAR(30)",
+        "addr"  : "VARCHAR(255)"
+    }
 }
